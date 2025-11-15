@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Auto Paste – Quick Paste Keyboard</title>
+  <meta name="description" content="Auto Paste – Quick Paste Keyboard lets you save your most-used text and paste it instantly from a custom keyboard. Fast, simple, and completely offline." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-elevated: #0b1020;
+      --bg-soft: #12172a;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --accent: #22c55e; /* green */
+      --accent-soft: rgba(34,197,94,0.12);
+      --accent-2: #6366f1; /* purple for highlights */
+      --border: #1f2933;
+      --danger: #ef4444;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(15,23,42,0.65);
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 40%, #000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Navbar */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(3,7,18,0.96), rgba(3,7,18,0.85), transparent);
+      border-bottom: 1px solid rgba(31,41,55,0.7);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-logo-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      background: conic-gradient(from 180deg, #16a34a, #22c55e, #a3e635, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.55);
+    }
+
+    .nav-logo-badge span {
+      font-size: 19px;
+      font-weight: 800;
+      color: #022c22;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 6px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.7);
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left, rgba(148,163,184,0.2), transparent 55%);
+    }
+
+    .nav-cta span {
+      font-size: 1.1rem;
+    }
+
+    .nav-cta:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .nav-toggle {
+      display: none;
+      border: none;
+      background: none;
+      color: #e5e7eb;
+      font-size: 1.25rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 40px 0 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(55,65,81,0.9);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .eyebrow-pill {
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(34,197,94,0.1);
+      font-weight: 600;
+      color: #bbf7d0;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 2.4vw + 1.6rem, 3rem);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #22c55e, #a855f7, #f97316);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 520px;
+      margin-bottom: 22px;
+    }
+
+    .hero-list {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 26px;
+    }
+
+    .hero-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #d1d5db;
+    }
+
+    .hero-list span {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      padding: 11px 20px;
+      border-radius: var(--radius-pill);
+      border: none;
+      cursor: pointer;
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: #022c22;
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+      box-shadow: 0 18px 45px rgba(34,197,94,0.6);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary span {
+      font-size: 1.15rem;
+    }
+
+    .btn-outline {
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148,163,184,0.75);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.7);
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .hero-meta-pill {
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(75,85,99,0.9);
+      background: rgba(15,23,42,0.6);
+      color: #e5e7eb;
+    }
+
+    /* Hero phone mock */
+    .hero-phone-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .phone {
+      width: 270px;
+      border-radius: 32px;
+      padding: 12px;
+      background: radial-gradient(circle at top left, #22c55e10, #020617 55%, #000);
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-notch {
+      height: 16px;
+      width: 40%;
+      background: #020617;
+      border-radius: 0 0 12px 12px;
+      margin: 0 auto 10px;
+    }
+
+    .phone-screen {
+      border-radius: 24px;
+      background: #f9fafb;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(203,213,225,0.7);
+    }
+
+    .screen-header {
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f4f4f5;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .screen-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .screen-body {
+      padding: 12px 14px 10px;
+      background: #f9fafb;
+    }
+
+    .snippet-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 9px 11px;
+      box-shadow: 0 6px 18px rgba(148,163,184,0.45);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+    }
+
+    .snippet-title {
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 2px;
+    }
+
+    .snippet-sub {
+      color: #6b7280;
+      font-size: 0.7rem;
+    }
+
+    .snippet-handle {
+      color: #22c55e;
+      font-size: 1rem;
+    }
+
+    .screen-footer {
+      padding: 9px 12px 12px;
+      border-top: 1px solid #e5e7eb;
+      background: #f4f4f5;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+    }
+
+    .screen-pill {
+      background: #22c55e;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .screen-pill span {
+      font-size: 0.95rem;
+    }
+
+    .screen-toggle {
+      display: flex;
+      gap: 4px;
+    }
+
+    .screen-toggle-btn {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+    }
+
+    .screen-toggle-btn--active {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+    }
+
+    /* Sections */
+    section {
+      padding: 40px 0;
+    }
+
+    .section-header {
+      margin-bottom: 22px;
+    }
+
+    .section-eyebrow {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    /* Features grid */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .feature-card {
+      background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(17,24,39,0.96));
+      border-radius: var(--radius-lg);
+      padding: 16px 15px 15px;
+      border: 1px solid rgba(31,41,55,0.95);
+      box-shadow: 0 16px 35px rgba(15,23,42,0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top, rgba(34,197,94,0.5), rgba(22,163,74,0.15), transparent 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .feature-title {
+      font-size: 0.98rem;
+      margin-bottom: 3px;
+      font-weight: 600;
+    }
+
+    .feature-body {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .feature-tag {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.9);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .feature-tag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    /* How it works */
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .how-step {
+      border-radius: var(--radius-lg);
+      padding: 14px 14px 16px;
+      border: 1px solid rgba(31,41,55,0.95);
+      background: radial-gradient(circle at top left, rgba(99,102,241,0.15), rgba(15,23,42,0.96));
+      box-shadow: var(--shadow-soft);
+      position: relative;
+    }
+
+    .how-step-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.9);
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .how-title {
+      font-size: 0.94rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .how-body {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    /* FAQ, Privacy, Terms */
+    .split-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(31,41,55,0.95);
+      background: linear-gradient(145deg, rgba(15,23,42,0.98), rgba(17,24,39,0.96));
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card + .card {
+      margin-top: 10px;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .card-list {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-left: 18px;
+      margin-top: 4px;
+    }
+
+    .card-list li + li {
+      margin-top: 4px;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      font-size: 0.74rem;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.92);
+      color: #e5e7eb;
+    }
+
+    /* Terms text */
+    .terms {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .terms h3 {
+      font-size: 0.9rem;
+      color: #e5e7eb;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .terms p {
+      margin-bottom: 6px;
+    }
+
+    .terms ul {
+      margin-left: 18px;
+      margin-bottom: 6px;
+    }
+
+    .terms li + li {
+      margin-top: 3px;
+    }
+
+    .pill-warning {
+      font-size: 0.76rem;
+      color: #f97316;
+      background: rgba(248,113,113,0.08);
+      border-radius: 999px;
+      padding: 4px 9px;
+      border: 1px dashed rgba(248,113,113,0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .pill-warning span {
+      font-size: 1rem;
+    }
+
+    /* Contact & footer */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(31,41,55,0.95);
+      padding: 16px 0 22px;
+      margin-top: 20px;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero {
+        padding-top: 28px;
+      }
+      .hero-phone-wrap {
+        order: -1;
+      }
+      .feature-grid,
+      .how-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .split-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        padding-inline: 8px;
+      }
+      .nav-links {
+        position: fixed;
+        inset: 56px 12px auto 12px;
+        background: rgba(15,23,42,0.98);
+        border-radius: 16px;
+        border: 1px solid rgba(55,65,81,0.9);
+        padding: 10px 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.18s ease;
+      }
+      .nav-links.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-cta {
+        display: none;
+      }
+      .nav-toggle {
+        display: block;
+      }
+      .feature-grid,
+      .how-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-outline,
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="shell nav-inner">
+      <a href="#top" class="nav-logo">
+        <div class="nav-logo-badge"><span>Q</span></div>
+        <div>
+          Auto Paste – <span style="opacity:.9;">Quick Paste</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <a class="nav-cta" href="#" target="_blank" rel="noopener">
+        <span>⬇</span> Get on Google Play
+      </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero shell">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">
+            <div class="eyebrow-pill">Keyboard shortcut for your text</div>
+            No sign-up • No tracking • Offline
+          </div>
+
+          <h1 class="hero-title">
+            Paste anything in <span>one tap</span> from a custom Android keyboard.
+          </h1>
+
+          <p class="hero-subtitle">
+            Auto Paste – Quick Paste is a smart keyboard that stores your most-used text (emails, phone numbers, replies, links) and lets you paste them instantly – without switching apps or typing again and again.
+          </p>
+
+          <ul class="hero-list">
+            <li><span>✓</span> List or grid layout · reorder items by dragging</li>
+            <li><span>✓</span> Optional auto-send after pasting – perfect for chat replies</li>
+            <li><span>✓</span> Separate themes & accent colors for app and keyboard</li>
+            <li><span>✓</span> Completely offline – your snippets stay on your device</li>
+          </ul>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="#" target="_blank" rel="noopener">
+              <span>▶</span> Get it on Google Play
+            </a>
+
+            <a class="btn-outline" href="https://aliaminchohan456.github.io/quick-paste-privacy-policy/" target="_blank" rel="noopener">
+              📄 View full Privacy Policy
+            </a>
+          </div>
+
+          <div class="hero-meta">
+            <div class="hero-meta-pill">Free · No account needed</div>
+            <div>Works wherever you can type – chats, browsers, forms & more.</div>
+          </div>
+        </div>
+
+        <!-- Phone mock -->
+        <div class="hero-phone-wrap" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <div class="screen-header">
+                <span>Quick Paste</span>
+                <span class="screen-chip">Accent: Purple</span>
+              </div>
+              <div class="screen-body">
+                <div class="snippet-card">
+                  <div>
+                    <div class="snippet-title">Work email</div>
+                    <div class="snippet-sub">me@mycompany.com</div>
+                  </div>
+                  <div class="snippet-handle">≡</div>
+                </div>
+                <div class="snippet-card">
+                  <div>
+                    <div class="snippet-title">Home address</div>
+                    <div class="snippet-sub">Tap to paste instantly</div>
+                  </div>
+                  <div class="snippet-handle">≡</div>
+                </div>
+                <div class="snippet-card">
+                  <div>
+                    <div class="snippet-title">Fast reply</div>
+                    <div class="snippet-sub">“On my way, I’ll text you soon.”</div>
+                  </div>
+                  <div class="snippet-handle">≡</div>
+                </div>
+              </div>
+              <div class="screen-footer">
+                <div class="screen-pill">
+                  <span>⚡</span> Auto Send OFF
+                </div>
+                <div class="screen-toggle">
+                  <div class="screen-toggle-btn screen-toggle-btn--active">List</div>
+                  <div class="screen-toggle-btn">Grid</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="shell">
+      <div class="section-header">
+        <div class="section-eyebrow">Features</div>
+        <h2 class="section-title">Designed for people who type the same things every day.</h2>
+        <p class="section-subtitle">
+          Auto Paste – Quick Paste removes small typing frustrations: saving you taps on every form, signup, or chat. Everything stays simple, fast, and local to your device.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-badge">⌨</div>
+          <h3 class="feature-title">Quick Paste Keyboard</h3>
+          <p class="feature-body">
+            Open the Quick Paste keyboard from any app. Tap a snippet to paste it directly into the text field – no copy/paste juggling, no app switching.
+          </p>
+          <div class="feature-tag">
+            <div class="feature-tag-dot"></div> Works anywhere you can type
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-badge">≡</div>
+          <h3 class="feature-title">List & grid layout</h3>
+          <p class="feature-body">
+            Choose between a clean list or a compact grid layout. Reorder items simply by dragging, and keep your most important snippets at the top.
+          </p>
+          <div class="feature-tag">
+            <div class="feature-tag-dot"></div> Reorder by dragging
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-badge">🎨</div>
+          <h3 class="feature-title">App & keyboard themes</h3>
+          <p class="feature-body">
+            Set independent light or dark themes for the app and keyboard. Pick your favorite accent color (green, yellow, red, purple and more) to match your style.
+          </p>
+          <div class="feature-tag">
+            <div class="feature-tag-dot"></div> Accent color picker
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-badge">🔍</div>
+          <h3 class="feature-title">Fast search</h3>
+          <p class="feature-body">
+            Use the search bar to instantly filter long snippet lists. Turn the search bar on or off from Settings to keep the home screen minimal if you prefer.
+          </p>
+          <div class="feature-tag">
+            <div class="feature-tag-dot"></div> Optional search bar
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-badge">⚡</div>
+          <h3 class="feature-title">Optional auto send</h3>
+          <p class="feature-body">
+            When enabled, the keyboard can automatically press “Enter” after pasting. Handy for quick “Yes”, “Thanks”, or OTP messages. Turn it off anytime.
+          </p>
+          <div class="feature-tag">
+            <div class="feature-tag-dot"></div> Per-keyboard setting
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-badge">🔒</div>
+          <h3 class="feature-title">Offline & local only</h3>
+          <p class="feature-body">
+            Snippets are stored only on your device in a local database. The app does not send your text to any server and does not require an internet connection.
+          </p>
+          <div class="feature-tag">
+            <div class="feature-tag-dot"></div> No account · No tracking
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="shell">
+      <div class="section-header">
+        <div class="section-eyebrow">How it works</div>
+        <h2 class="section-title">From install to first quick paste in under a minute.</h2>
+      </div>
+
+      <div class="how-grid">
+        <article class="how-step">
+          <div class="how-step-number">1</div>
+          <h3 class="how-title">Install & enable the keyboard</h3>
+          <p class="how-body">
+            Download Auto Paste – Quick Paste from Google Play. Follow the in-app steps to enable the custom keyboard in your Android system settings.
+          </p>
+        </article>
+
+        <article class="how-step">
+          <div class="how-step-number">2</div>
+          <h3 class="how-title">Add your favorite snippets</h3>
+          <p class="how-body">
+            Add items such as email addresses, delivery information, bank IBAN, social media links, or ready-made chat replies. Reorder them by dragging.
+          </p>
+        </article>
+
+        <article class="how-step">
+          <div class="how-step-number">3</div>
+          <h3 class="how-title">Use Quick Paste in any app</h3>
+          <p class="how-body">
+            When typing, switch to the Quick Paste keyboard. Tap an item once to paste it. Optionally enable Auto Send if you want the app to press Enter for you.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PRIVACY + FAQ -->
+    <section id="privacy" class="shell">
+      <div class="section-header">
+        <div class="section-eyebrow">Privacy & Safety</div>
+        <h2 class="section-title">Your text is yours. We keep it on your device.</h2>
+        <p class="section-subtitle">
+          We built Auto Paste – Quick Paste to be a simple offline utility. We do not run accounts, analytics, or advertising SDKs. What you save inside the app stays on your phone.
+        </p>
+      </div>
+
+      <div class="split-grid">
+        <div>
+          <article class="card">
+            <h3 class="card-title">Data we <strong>do not</strong> collect</h3>
+            <p class="card-body">
+              The app itself does not collect, store, or transmit any personal data to our servers. In particular, we do not:
+            </p>
+            <ul class="card-list">
+              <li>Collect your snippets, messages, or content typed with the keyboard</li>
+              <li>Require you to create an account or sign in</li>
+              <li>Track you across apps or websites for advertising purposes</li>
+            </ul>
+            <p class="card-body">
+              All snippet data lives only in a local database on your device.
+            </p>
+            <div class="chip-row">
+              <span class="chip">Offline utility</span>
+              <span class="chip">No cloud sync</span>
+              <span class="chip">No ads SDK</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">Where to read full details</h3>
+            <p class="card-body">
+              Our complete Privacy Policy is available at:
+            </p>
+            <p class="card-body">
+              <a href="https://aliaminchohan456.github.io/quick-paste-privacy-policy/" target="_blank" rel="noopener" style="color:#a5b4fc;">
+                https://aliaminchohan456.github.io/quick-paste-privacy-policy/
+              </a>
+            </p>
+            <p class="card-body">
+              That document explains exactly how the app works, what information is stored locally, and how you can remove your data by uninstalling the app.
+            </p>
+          </article>
+        </div>
+
+        <div>
+          <article class="card">
+            <h3 class="card-title">FAQ</h3>
+            <div class="card-body">
+              <p><strong>Does the app read my password fields?</strong><br>
+                The keyboard only pastes what you choose in the app. It does not automatically read or upload anything you type.</p>
+              <br />
+              <p><strong>What happens if I uninstall the app?</strong><br>
+                All snippets stored inside Auto Paste – Quick Paste are deleted along with the app. We do not keep any copies.</p>
+              <br />
+              <p><strong>Can the keyboard send messages by itself?</strong><br>
+                Auto Send is optional. If enabled, it simply presses the Enter/Send key right after pasting your selected text.</p>
+              <br />
+              <p><strong>Will you ever add online sync?</strong><br>
+                If we add cloud features in the future, we will update the app, this website, and the Privacy Policy clearly before you opt-in.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TERMS & CONDITIONS -->
+    <section id="terms" class="shell">
+      <div class="section-header">
+        <div class="section-eyebrow">Legal</div>
+        <h2 class="section-title">Terms &amp; Conditions</h2>
+      </div>
+
+      <article class="card">
+        <div class="pill-warning">
+          <span>⚠</span>
+          These Terms are a general template and do not replace professional legal advice.
+        </div>
+
+        <div class="terms">
+          <h3>1. Introduction</h3>
+          <p>
+            These Terms &amp; Conditions (“Terms”) govern your use of the mobile application <strong>Auto Paste – Quick Paste</strong>
+            (the “App”). By installing, accessing, or using the App, you agree to be bound by these Terms. If you do not agree, please do not use the App.
+          </p>
+
+          <h3>2. Developer information</h3>
+          <p>
+            The App is developed and published by the individual developer (“we”, “us”, “our”). You can contact us using the details in the Contact section below.
+          </p>
+
+          <h3>3. License &amp; permitted use</h3>
+          <p>
+            We grant you a personal, limited, non-exclusive, non-transferable, and revocable license to install and use the App on Android devices that you own or control, solely for your personal, non-commercial use or internal business use.
+          </p>
+          <p>You agree not to:</p>
+          <ul>
+            <li>Reverse engineer, decompile, disassemble, or attempt to derive the source code of the App;</li>
+            <li>Modify, adapt, translate, or create derivative works based on the App;</li>
+            <li>Rent, lease, loan, sell, sublicense, or distribute the App or any part of it to a third party;</li>
+            <li>Use the App in any manner that violates applicable laws or regulations.</li>
+          </ul>
+
+          <h3>4. User responsibilities</h3>
+          <p>
+            You are responsible for the content you store and paste using the App. Please make sure you have the right to use any text you save as snippets, and do not store sensitive information on devices you do not control.
+          </p>
+          <p>
+            You are also responsible for maintaining the security of your device, including screen lock and system security updates.
+          </p>
+
+          <h3>5. Privacy &amp; data</h3>
+          <p>
+            The App is designed to work primarily offline and stores snippet data locally on your device. We do not collect or store your snippets on our own servers.
+          </p>
+          <p>
+            However, your use of the App may involve services provided by third parties (for example, Google Play Services or the app store from which you downloaded the App). Those third parties may collect data under their own terms and privacy policies.
+          </p>
+          <p>
+            For full details about privacy, please read our separate
+            <a href="https://aliaminchohan456.github.io/quick-paste-privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>.
+          </p>
+
+          <h3>6. Third-party services</h3>
+          <p>
+            The App may include links or references to third-party websites, apps, or services, such as the Google Play Store. We are not responsible for the content, policies, or practices of those third-party services.
+          </p>
+
+          <h3>7. Updates &amp; changes to the App</h3>
+          <p>
+            We may update, improve, or modify the App at any time, including adding or removing features. We may also discontinue the App or any part of it, temporarily or permanently, without prior notice.
+          </p>
+
+          <h3>8. Disclaimer of warranties</h3>
+          <p>
+            The App is provided on an “as is” and “as available” basis. To the maximum extent permitted by law, we disclaim all warranties, whether express or implied, including but not limited to any implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
+          </p>
+          <p>
+            We do not guarantee that the App will be uninterrupted, error-free, secure, or compatible with every device or Android version.
+          </p>
+
+          <h3>9. Limitation of liability</h3>
+          <p>
+            To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of data, loss of profits, or any other damages arising out of or in connection with your use of the App.
+          </p>
+          <p>
+            Your sole and exclusive remedy for any dissatisfaction with the App is to stop using it and uninstall it from your device.
+          </p>
+
+          <h3>10. Termination</h3>
+          <p>
+            We may suspend or terminate your access to the App at any time if we reasonably believe you have violated these Terms or used the App in a way that may cause harm to us, the App, or other users.
+          </p>
+          <p>
+            You may terminate your use of the App at any time by uninstalling it from your device.
+          </p>
+
+          <h3>11. Changes to these Terms</h3>
+          <p>
+            We may update these Terms from time to time. When we do, we will update the “Last updated” date at the bottom of this section. Your continued use of the App after changes are published means you accept the updated Terms.
+          </p>
+
+          <h3>12. Governing law</h3>
+          <p>
+            These Terms shall be governed by and construed in accordance with the laws of your country or region of residence, unless local law requires otherwise.
+          </p>
+
+          <h3>13. Contact</h3>
+          <p>
+            If you have any questions about these Terms or the App, you can contact us at:
+          </p>
+          <ul>
+            <li><strong>Email:</strong> Aliaminchohan456@gmail.com</li>
+          </ul>
+
+          <p style="margin-top:10px; font-size:0.78rem; color:#6b7280;">
+            Last updated: <em>November 2025</em>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="shell">
+      <div class="section-header">
+        <div class="section-eyebrow">Support</div>
+        <h2 class="section-title">Need help or have a feature idea?</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div>
+          <article class="card">
+            <h3 class="card-title">Contact the developer</h3>
+            <p class="card-body">
+              Found a bug, have a question, or want to suggest an improvement? You can reach the developer directly via email.
+            </p>
+            <p class="card-body" style="margin-top:6px;">
+              <strong>Email:</strong>
+              <a href="mailto:Aliaminchohan456@gmail.com" style="color:#a5b4fc;"> Aliaminchohan456@gmail.com</a>
+            </p>
+            <p class="card-body" style="margin-top:8px;">
+              When contacting support, please include:
+            </p>
+            <ul class="card-list">
+              <li>Your device model and Android version</li>
+              <li>A short description of the issue or request</li>
+              <li>Screenshots if possible (no personal data please)</li>
+            </ul>
+          </article>
+        </div>
+
+        <div>
+          <article class="card">
+            <h3 class="card-title">Play Store listing</h3>
+            <p class="card-body">
+              As soon as the app is live, you will be able to rate and review Auto Paste – Quick Paste on Google Play. Your feedback helps shape future updates.
+            </p>
+            <div class="chip-row" style="margin-top:10px;">
+              <span class="chip">Fast bug fixes</span>
+              <span class="chip">New themes</span>
+              <span class="chip">Feature requests welcome</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <div>© <span id="year"></span> Auto Paste – Quick Paste. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="#privacy">Privacy &amp; Data</a>
+        <a href="#terms">Terms &amp; Conditions</a>
+        <a href="https://aliaminchohan456.github.io/quick-paste-privacy-policy/" target="_blank" rel="noopener">Full Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle?.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
