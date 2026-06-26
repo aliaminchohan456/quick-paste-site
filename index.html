@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Auto Paste – Quick Paste Keyboard</title>
-  <meta name="description" content="Auto Paste – Quick Paste Keyboard lets you save your most-used text and paste it instantly from a custom keyboard. Fast, simple, and completely offline." />
+  <title>Quick Paste Keyboard – Fast Text Snippets & Cloud Sync</title>
+  <meta name="description" content="Quick Paste Keyboard lets you save your most-used text and paste it instantly from a custom Android keyboard. Offline-first with optional Google cloud sync and backup." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -19,7 +19,8 @@
       --muted: #9ca3af;
       --accent: #22c55e; /* green */
       --accent-soft: rgba(34,197,94,0.12);
-      --accent-2: #6366f1; /* purple for highlights */
+      --accent-2: #6366f1; /* indigo for sync highlights */
+      --accent-2-soft: rgba(99,102,241,0.14);
       --border: #1f2933;
       --danger: #ef4444;
       --radius-lg: 18px;
@@ -194,7 +195,7 @@
     }
 
     .hero-title span {
-      background: linear-gradient(120deg, #22c55e, #a855f7, #f97316);
+      background: linear-gradient(120deg, #22c55e, #6366f1, #a855f7);
       -webkit-background-clip: text;
       color: transparent;
     }
@@ -294,6 +295,12 @@
       color: #e5e7eb;
     }
 
+    .hero-meta-pill--accent {
+      border-color: rgba(99,102,241,0.6);
+      background: var(--accent-2-soft);
+      color: #c7d2fe;
+    }
+
     /* Hero phone mock */
     .hero-phone-wrap {
       display: flex;
@@ -345,6 +352,25 @@
       color: #166534;
       font-size: 0.72rem;
       font-weight: 600;
+    }
+
+    .screen-sync {
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #eef2ff;
+      border-bottom: 1px solid #e0e7ff;
+      font-size: 0.72rem;
+      color: #3730a3;
+    }
+
+    .screen-sync-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.25);
     }
 
     .screen-body {
@@ -442,6 +468,10 @@
       margin-bottom: 6px;
     }
 
+    .section-eyebrow--accent2 {
+      color: #a5b4fc;
+    }
+
     .section-title {
       font-size: 1.45rem;
       margin-bottom: 6px;
@@ -470,6 +500,11 @@
       overflow: hidden;
     }
 
+    .feature-card--sync {
+      background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(30,27,75,0.96));
+      border-color: rgba(99,102,241,0.4);
+    }
+
     .feature-badge {
       width: 28px;
       height: 28px;
@@ -480,6 +515,10 @@
       justify-content: center;
       font-size: 15px;
       margin-bottom: 10px;
+    }
+
+    .feature-badge--sync {
+      background: radial-gradient(circle at top, rgba(99,102,241,0.55), rgba(67,56,202,0.15), transparent 70%);
     }
 
     .feature-title {
@@ -506,11 +545,21 @@
       gap: 5px;
     }
 
+    .feature-tag--sync {
+      border-color: rgba(99,102,241,0.5);
+      background: var(--accent-2-soft);
+      color: #c7d2fe;
+    }
+
     .feature-tag-dot {
       width: 6px;
       height: 6px;
       border-radius: 999px;
       background: #22c55e;
+    }
+
+    .feature-tag-dot--sync {
+      background: #6366f1;
     }
 
     /* How it works */
@@ -551,6 +600,111 @@
     .how-body {
       font-size: 0.84rem;
       color: var(--muted);
+    }
+
+    /* Sync highlight band */
+    .sync-band {
+      border-radius: var(--radius-lg);
+      padding: 22px 22px 24px;
+      border: 1px solid rgba(99,102,241,0.4);
+      background:
+        radial-gradient(circle at top right, rgba(99,102,241,0.22), transparent 55%),
+        linear-gradient(145deg, rgba(15,23,42,0.98), rgba(30,27,75,0.96));
+      box-shadow: 0 20px 50px rgba(30,27,75,0.45);
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 22px;
+      align-items: center;
+    }
+
+    .sync-band-title {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .sync-band-body {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .sync-points {
+      list-style: none;
+      display: grid;
+      gap: 7px;
+      font-size: 0.84rem;
+      color: #d1d5db;
+    }
+
+    .sync-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .sync-points span {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent-2-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #a5b4fc;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .sync-visual {
+      border-radius: var(--radius-md);
+      background: rgba(15,23,42,0.7);
+      border: 1px solid rgba(99,102,241,0.3);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .sync-device {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: rgba(2,6,23,0.7);
+      border: 1px solid rgba(55,65,81,0.9);
+      font-size: 0.78rem;
+    }
+
+    .sync-device-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: rgba(99,102,241,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .sync-device-meta {
+      flex: 1;
+    }
+
+    .sync-device-name {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .sync-device-status {
+      font-size: 0.7rem;
+      color: #94a3b8;
+    }
+
+    .sync-arrow {
+      text-align: center;
+      color: #6366f1;
+      font-size: 0.9rem;
     }
 
     /* FAQ, Privacy, Terms */
@@ -608,6 +762,12 @@
       border: 1px solid rgba(55,65,81,0.9);
       background: rgba(15,23,42,0.92);
       color: #e5e7eb;
+    }
+
+    .chip--sync {
+      border-color: rgba(99,102,241,0.5);
+      background: var(--accent-2-soft);
+      color: #c7d2fe;
     }
 
     /* Terms text */
@@ -707,7 +867,8 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .split-grid,
-      .contact-grid {
+      .contact-grid,
+      .sync-band {
         grid-template-columns: minmax(0, 1fr);
       }
     }
@@ -766,7 +927,7 @@
       <a href="#top" class="nav-logo">
         <div class="nav-logo-badge"><span>Q</span></div>
         <div>
-          Auto Paste – <span style="opacity:.9;">Quick Paste</span>
+          Quick Paste <span style="opacity:.9;">Keyboard</span>
         </div>
       </a>
 
@@ -774,6 +935,7 @@
 
       <nav class="nav-links" id="navLinks">
         <a href="#features">Features</a>
+        <a href="#sync">Cloud Sync</a>
         <a href="#how">How it works</a>
         <a href="#privacy">Privacy</a>
         <a href="#terms">Terms</a>
@@ -793,7 +955,7 @@
         <div>
           <div class="eyebrow">
             <div class="eyebrow-pill">Keyboard shortcut for your text</div>
-            No sign-up • No tracking • Offline
+            Offline-first · Optional cloud sync
           </div>
 
           <h1 class="hero-title">
@@ -801,14 +963,14 @@
           </h1>
 
           <p class="hero-subtitle">
-            Auto Paste – Quick Paste is a smart keyboard that stores your most-used text (emails, phone numbers, replies, links) and lets you paste them instantly – without switching apps or typing again and again.
+            Quick Paste Keyboard is a smart keyboard that stores your most-used text (emails, phone numbers, replies, links) and lets you paste them instantly – without switching apps or typing again and again. Works fully offline, with optional Google cloud sync to back up your snippets across devices.
           </p>
 
           <ul class="hero-list">
             <li><span>✓</span> List or grid layout · reorder items by dragging</li>
             <li><span>✓</span> Optional auto-send after pasting – perfect for chat replies</li>
             <li><span>✓</span> Separate themes & accent colors for app and keyboard</li>
-            <li><span>✓</span> Completely offline – your snippets stay on your device</li>
+            <li><span>✓</span> Offline-first · sign in only if you want cloud backup</li>
           </ul>
 
           <div class="hero-actions">
@@ -822,7 +984,8 @@
           </div>
 
           <div class="hero-meta">
-            <div class="hero-meta-pill">Free · No account needed</div>
+            <div class="hero-meta-pill">Free · Works offline</div>
+            <div class="hero-meta-pill hero-meta-pill--accent">☁ Optional Google cloud sync</div>
             <div>Works wherever you can type – chats, browsers, forms & more.</div>
           </div>
         </div>
@@ -835,6 +998,12 @@
               <div class="screen-header">
                 <span>Quick Paste</span>
                 <span class="screen-chip">Accent: Purple</span>
+              </div>
+              <div class="screen-sync">
+                <span>Cloud Sync</span>
+                <span style="display:inline-flex;align-items:center;gap:6px;font-weight:600;">
+                  <span class="screen-sync-dot"></span> Synced
+                </span>
               </div>
               <div class="screen-body">
                 <div class="snippet-card">
@@ -880,7 +1049,7 @@
         <div class="section-eyebrow">Features</div>
         <h2 class="section-title">Designed for people who type the same things every day.</h2>
         <p class="section-subtitle">
-          Auto Paste – Quick Paste removes small typing frustrations: saving you taps on every form, signup, or chat. Everything stays simple, fast, and local to your device.
+          Quick Paste Keyboard removes small typing frustrations: saving you taps on every form, signup, or chat. Everything stays simple, fast, and local to your device – with optional cloud backup when you want it.
         </p>
       </div>
 
@@ -897,13 +1066,13 @@
         </article>
 
         <article class="feature-card">
-          <div class="feature-badge">≡</div>
-          <h3 class="feature-title">List & grid layout</h3>
+          <div class="feature-badge">📁</div>
+          <h3 class="feature-title">Folders & templates</h3>
           <p class="feature-body">
-            Choose between a clean list or a compact grid layout. Reorder items simply by dragging, and keep your most important snippets at the top.
+            Organize snippets into custom folders with unique icons and colors. Start fast with a built-in template gallery, then reorder items by dragging.
           </p>
           <div class="feature-tag">
-            <div class="feature-tag-dot"></div> Reorder by dragging
+            <div class="feature-tag-dot"></div> Folder organization
           </div>
         </article>
 
@@ -940,16 +1109,65 @@
           </div>
         </article>
 
-        <article class="feature-card">
-          <div class="feature-badge">🔒</div>
-          <h3 class="feature-title">Offline & local only</h3>
+        <article class="feature-card feature-card--sync">
+          <div class="feature-badge feature-badge--sync">☁</div>
+          <h3 class="feature-title">Cloud Sync & Backup</h3>
           <p class="feature-body">
-            Snippets are stored only on your device in a local database. The app does not send your text to any server and does not require an internet connection.
+            Sign in with Google to back up your snippets and folders to the cloud. Restore your entire library on any device with a single tap. Fully optional – the app works perfectly offline.
           </p>
-          <div class="feature-tag">
-            <div class="feature-tag-dot"></div> No account · No tracking
+          <div class="feature-tag feature-tag--sync">
+            <div class="feature-tag-dot feature-tag-dot--sync"></div> Optional · Google Sign-In
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- CLOUD SYNC BAND -->
+    <section id="sync" class="shell">
+      <div class="sync-band">
+        <div>
+          <div class="section-eyebrow section-eyebrow--accent2">Cloud Sync &​amp; Backup</div>
+          <h2 class="sync-band-title">Your snippets, on every device. Only if you want.</h2>
+          <p class="sync-band-body">
+            Cloud Sync is an opt-in feature powered by Google Firebase. It backs up your snippets and folders so you can restore them after a reinstall or on a new phone. Never signed in? Nothing ever leaves your device.
+          </p>
+          <ul class="sync-points">
+            <li><span>✓</span> Sign in securely with your Google account</li>
+            <li><span>✓</span> Offline-first: changes queue locally and sync automatically when online</li>
+            <li><span>✓</span> One-tap restore on any device</li>
+            <li><span>✓</span> Manual “Sync Now” control whenever you want</li>
+            <li><span>✓</span> Sign out anytime – the app keeps working fully offline</li>
+          </ul>
+        </div>
+
+        <div class="sync-visual" aria-hidden="true">
+          <div class="sync-device">
+            <div class="sync-device-icon">📱</div>
+            <div class="sync-device-meta">
+              <div class="sync-device-name">Phone</div>
+              <div class="sync-device-status">Local + synced</div>
+            </div>
+            <span style="color:#6366f1;">●</span>
+          </div>
+          <div class="sync-arrow">↕</div>
+          <div class="sync-device">
+            <div class="sync-device-icon">☁</div>
+            <div class="sync-device-meta">
+              <div class="sync-device-name">Your Firebase backup</div>
+              <div class="sync-device-status">Encrypted in transit</div>
+            </div>
+            <span style="color:#6366f1;">●</span>
+          </div>
+          <div class="sync-arrow">↕</div>
+          <div class="sync-device">
+            <div class="sync-device-icon">💻</div>
+            <div class="sync-device-meta">
+              <div class="sync-device-name">New device</div>
+              <div class="sync-device-status">One-tap restore</div>
+            </div>
+            <span style="color:#6366f1;">●</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -965,7 +1183,7 @@
           <div class="how-step-number">1</div>
           <h3 class="how-title">Install & enable the keyboard</h3>
           <p class="how-body">
-            Download Auto Paste – Quick Paste from Google Play. Follow the in-app steps to enable the custom keyboard in your Android system settings.
+            Download Quick Paste Keyboard from Google Play. Follow the in-app steps to enable the custom keyboard in your Android system settings.
           </p>
         </article>
 
@@ -973,15 +1191,15 @@
           <div class="how-step-number">2</div>
           <h3 class="how-title">Add your favorite snippets</h3>
           <p class="how-body">
-            Add items such as email addresses, delivery information, bank IBAN, social media links, or ready-made chat replies. Reorder them by dragging.
+            Add items such as email addresses, delivery information, bank IBAN, social media links, or ready-made chat replies. Organize them into folders and reorder by dragging.
           </p>
         </article>
 
         <article class="how-step">
           <div class="how-step-number">3</div>
-          <h3 class="how-title">Use Quick Paste in any app</h3>
+          <h3 class="how-title">Paste anywhere, sync if you want</h3>
           <p class="how-body">
-            When typing, switch to the Quick Paste keyboard. Tap an item once to paste it. Optionally enable Auto Send if you want the app to press Enter for you.
+            Switch to the Quick Paste keyboard while typing and tap an item to paste it. Optionally sign in with Google to back up and restore your snippets across devices.
           </p>
         </article>
       </div>
@@ -990,32 +1208,47 @@
     <!-- PRIVACY + FAQ -->
     <section id="privacy" class="shell">
       <div class="section-header">
-        <div class="section-eyebrow">Privacy & Safety</div>
-        <h2 class="section-title">Your text is yours. We keep it on your device.</h2>
+        <div class="section-eyebrow">Privacy &​amp; Safety</div>
+        <h2 class="section-title">Your text is yours. Offline by default.</h2>
         <p class="section-subtitle">
-          We built Auto Paste – Quick Paste to be a simple offline utility. We do not run accounts, analytics, or advertising SDKs. What you save inside the app stays on your phone.
+          Quick Paste Keyboard is built to be an offline-first utility. We do not run ads, analytics, or advertising SDKs. Cloud sync is opt-in only – if you never sign in, your snippets never leave your device.
         </p>
       </div>
 
       <div class="split-grid">
         <div>
           <article class="card">
-            <h3 class="card-title">Data we <strong>do not</strong> collect</h3>
+            <h3 class="card-title">What stays on your device</h3>
             <p class="card-body">
-              The app itself does not collect, store, or transmit any personal data to our servers. In particular, we do not:
+              By default, all snippets, folders, and settings are stored only in a local database on your device. We do <strong>not</strong>:
             </p>
             <ul class="card-list">
-              <li>Collect your snippets, messages, or content typed with the keyboard</li>
-              <li>Require you to create an account or sign in</li>
-              <li>Track you across apps or websites for advertising purposes</li>
+              <li>Read or upload what you type in other apps</li>
+              <li>Require an account to use the app</li>
+              <li>Track you across apps or websites for advertising</li>
+              <li>Use analytics, crash reporting, or advertising SDKs</li>
             </ul>
-            <p class="card-body">
-              All snippet data lives only in a local database on your device.
-            </p>
             <div class="chip-row">
-              <span class="chip">Offline utility</span>
-              <span class="chip">No cloud sync</span>
-              <span class="chip">No ads SDK</span>
+              <span class="chip">Offline-first</span>
+              <span class="chip">No ads</span>
+              <span class="chip">No analytics</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 class="card-title">What happens when you sign in</h3>
+            <p class="card-body">
+              If you enable Cloud Sync and sign in with Google, the app receives your Google email (used as your account ID) and syncs your snippets and folders to your own Firebase space. This is used only to back up and restore your data across devices.
+            </p>
+            <ul class="card-list">
+              <li>Only data you create in the app is synced</li>
+              <li>The keyboard never captures or syncs what you type elsewhere</li>
+              <li>You can sign out and delete synced data anytime</li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip chip--sync">Opt-in only</span>
+              <span class="chip chip--sync">Google Sign-In</span>
+              <span class="chip chip--sync">Firebase Firestore</span>
             </div>
           </article>
 
@@ -1029,9 +1262,6 @@
                 https://aliaminchohan456.github.io/quick-paste-privacy-policy/
               </a>
             </p>
-            <p class="card-body">
-              That document explains exactly how the app works, what information is stored locally, and how you can remove your data by uninstalling the app.
-            </p>
           </article>
         </div>
 
@@ -1042,14 +1272,17 @@
               <p><strong>Does the app read my password fields?</strong><br>
                 The keyboard only pastes what you choose in the app. It does not automatically read or upload anything you type.</p>
               <br />
+              <p><strong>Do I need an account?</strong><br>
+                No. The app works fully offline without any sign-in. Cloud Sync is optional – only enable it if you want to back up or restore across devices.</p>
+              <br />
               <p><strong>What happens if I uninstall the app?</strong><br>
-                All snippets stored inside Auto Paste – Quick Paste are deleted along with the app. We do not keep any copies.</p>
+                All snippets stored locally are deleted along with the app. If you used Cloud Sync, your synced copy remains in your Firebase account until you delete it from the app or contact us.</p>
               <br />
               <p><strong>Can the keyboard send messages by itself?</strong><br>
                 Auto Send is optional. If enabled, it simply presses the Enter/Send key right after pasting your selected text.</p>
               <br />
-              <p><strong>Will you ever add online sync?</strong><br>
-                If we add cloud features in the future, we will update the app, this website, and the Privacy Policy clearly before you opt-in.</p>
+              <p><strong>Is my synced data shared with anyone?</strong><br>
+                No. Synced data lives under your own Google/Firebase account and is not shared with other users or third parties. We do not sell your data.</p>
             </div>
           </article>
         </div>
@@ -1060,7 +1293,7 @@
     <section id="terms" class="shell">
       <div class="section-header">
         <div class="section-eyebrow">Legal</div>
-        <h2 class="section-title">Terms &amp; Conditions</h2>
+        <h2 class="section-title">Terms &​amp; Conditions</h2>
       </div>
 
       <article class="card">
@@ -1072,7 +1305,7 @@
         <div class="terms">
           <h3>1. Introduction</h3>
           <p>
-            These Terms &amp; Conditions (“Terms”) govern your use of the mobile application <strong>Auto Paste – Quick Paste</strong>
+            These Terms &​amp; Conditions (“Terms”) govern your use of the mobile application <strong>Quick Paste Keyboard</strong>
             (the “App”). By installing, accessing, or using the App, you agree to be bound by these Terms. If you do not agree, please do not use the App.
           </p>
 
@@ -1081,7 +1314,7 @@
             The App is developed and published by the individual developer (“we”, “us”, “our”). You can contact us using the details in the Contact section below.
           </p>
 
-          <h3>3. License &amp; permitted use</h3>
+          <h3>3. License &​amp; permitted use</h3>
           <p>
             We grant you a personal, limited, non-exclusive, non-transferable, and revocable license to install and use the App on Android devices that you own or control, solely for your personal, non-commercial use or internal business use.
           </p>
@@ -1098,15 +1331,15 @@
             You are responsible for the content you store and paste using the App. Please make sure you have the right to use any text you save as snippets, and do not store sensitive information on devices you do not control.
           </p>
           <p>
-            You are also responsible for maintaining the security of your device, including screen lock and system security updates.
+            You are also responsible for maintaining the security of your device, including screen lock and system security updates, and for keeping your Google account secure if you enable Cloud Sync.
           </p>
 
-          <h3>5. Privacy &amp; data</h3>
+          <h3>5. Privacy &​amp; data</h3>
           <p>
-            The App is designed to work primarily offline and stores snippet data locally on your device. We do not collect or store your snippets on our own servers.
+            The App is offline-first and stores snippet data locally on your device. If you enable the optional Cloud Sync feature, your snippets and folders are synced to your own Google Firebase account space to enable backup and cross-device restore.
           </p>
           <p>
-            However, your use of the App may involve services provided by third parties (for example, Google Play Services or the app store from which you downloaded the App). Those third parties may collect data under their own terms and privacy policies.
+            Your use of the App may also involve services provided by third parties (for example, Google Play Services, Google Sign-In, and Firebase). Those third parties may collect data under their own terms and privacy policies.
           </p>
           <p>
             For full details about privacy, please read our separate
@@ -1115,10 +1348,10 @@
 
           <h3>6. Third-party services</h3>
           <p>
-            The App may include links or references to third-party websites, apps, or services, such as the Google Play Store. We are not responsible for the content, policies, or practices of those third-party services.
+            The App uses Google Firebase (Authentication and Cloud Firestore) and Google Sign-In to provide the optional Cloud Sync feature, and Google Play Services for distribution. We are not responsible for the content, policies, or practices of those third-party services beyond what is described in our Privacy Policy.
           </p>
 
-          <h3>7. Updates &amp; changes to the App</h3>
+          <h3>7. Updates &​amp; changes to the App</h3>
           <p>
             We may update, improve, or modify the App at any time, including adding or removing features. We may also discontinue the App or any part of it, temporarily or permanently, without prior notice.
           </p>
@@ -1128,12 +1361,12 @@
             The App is provided on an “as is” and “as available” basis. To the maximum extent permitted by law, we disclaim all warranties, whether express or implied, including but not limited to any implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
           </p>
           <p>
-            We do not guarantee that the App will be uninterrupted, error-free, secure, or compatible with every device or Android version.
+            We do not guarantee that the App, or the Cloud Sync feature, will be uninterrupted, error-free, secure, or compatible with every device or Android version.
           </p>
 
           <h3>9. Limitation of liability</h3>
           <p>
-            To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of data, loss of profits, or any other damages arising out of or in connection with your use of the App.
+            To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of data (including synced data), loss of profits, or any other damages arising out of or in connection with your use of the App.
           </p>
           <p>
             Your sole and exclusive remedy for any dissatisfaction with the App is to stop using it and uninstall it from your device.
@@ -1144,7 +1377,7 @@
             We may suspend or terminate your access to the App at any time if we reasonably believe you have violated these Terms or used the App in a way that may cause harm to us, the App, or other users.
           </p>
           <p>
-            You may terminate your use of the App at any time by uninstalling it from your device.
+            You may terminate your use of the App at any time by uninstalling it from your device. If you used Cloud Sync, you may request deletion of your synced data via the contact below.
           </p>
 
           <h3>11. Changes to these Terms</h3>
@@ -1162,11 +1395,11 @@
             If you have any questions about these Terms or the App, you can contact us at:
           </p>
           <ul>
-            <li><strong>Email:</strong> Aliaminchohan456@gmail.com</li>
+            <li><strong>Email:</strong> aliaminchohan456@gmail.com</li>
           </ul>
 
           <p style="margin-top:10px; font-size:0.78rem; color:#6b7280;">
-            Last updated: <em>November 2025</em>
+            Last updated: <em>June 2026</em>
           </p>
         </div>
       </article>
@@ -1188,7 +1421,7 @@
             </p>
             <p class="card-body" style="margin-top:6px;">
               <strong>Email:</strong>
-              <a href="mailto:Aliaminchohan456@gmail.com" style="color:#a5b4fc;"> Aliaminchohan456@gmail.com</a>
+              <a href="mailto:aliaminchohan456@gmail.com" style="color:#a5b4fc;"> aliaminchohan456@gmail.com</a>
             </p>
             <p class="card-body" style="margin-top:8px;">
               When contacting support, please include:
@@ -1205,7 +1438,7 @@
           <article class="card">
             <h3 class="card-title">Play Store listing</h3>
             <p class="card-body">
-              As soon as the app is live, you will be able to rate and review Auto Paste – Quick Paste on Google Play. Your feedback helps shape future updates.
+              Rate and review Quick Paste Keyboard on Google Play. Your feedback helps shape future updates.
             </p>
             <div class="chip-row" style="margin-top:10px;">
               <span class="chip">Fast bug fixes</span>
@@ -1221,10 +1454,10 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="shell footer-inner">
-      <div>© <span id="year"></span> Auto Paste – Quick Paste. All rights reserved.</div>
+      <div>© <span id="year"></span> Quick Paste Keyboard. All rights reserved.</div>
       <div class="footer-links">
-        <a href="#privacy">Privacy &amp; Data</a>
-        <a href="#terms">Terms &amp; Conditions</a>
+        <a href="#privacy">Privacy &​amp; Data</a>
+        <a href="#terms">Terms &​amp; Conditions</a>
         <a href="https://aliaminchohan456.github.io/quick-paste-privacy-policy/" target="_blank" rel="noopener">Full Privacy Policy</a>
       </div>
     </div>
