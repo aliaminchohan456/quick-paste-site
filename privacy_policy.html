@@ -5,19 +5,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Privacy Policy for Quick Paste Keyboard.">
   <title>Privacy Policy | Quick Paste Keyboard</title>
-  <style>
-    :root{color-scheme:light dark;--bg:#f7f9fc;--card:#fff;--text:#172033;--muted:#5f6b7d;--accent:#3478f6;--line:#dfe5ee;--soft:#eaf2ff}
-    @media(prefers-color-scheme:dark){:root{--bg:#0b0e13;--card:#151922;--text:#f3f5f9;--muted:#aeb5c2;--line:#293140;--soft:#16243a}}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
-    main{max-width:860px;margin:auto;padding:48px 22px 72px}a{color:var(--accent)}h1{font-size:clamp(2rem,6vw,3rem);line-height:1.15;margin:0 0 8px}h2{margin:38px 0 10px;font-size:1.35rem}h3{margin:24px 0 6px}.updated,.muted{color:var(--muted)}
-    .summary,.note{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin:24px 0}.note{background:var(--soft);border-color:color-mix(in srgb,var(--accent) 25%,var(--line))}
-    li{margin:7px 0}code{font-size:.92em}.links{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}.links a{padding:10px 14px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:var(--card)}
-  </style>
+  <link rel="stylesheet" href="legal.css">
 </head>
-<body><main>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header"><nav class="nav" aria-label="Main navigation">
+  <a class="brand" href="index.html"><span class="brand-mark">Q</span><span>Quick Paste</span></a>
+  <div class="nav-links"><a href="index.html">Home</a><a href="privacy_policy.html" aria-current="page">Privacy</a><a href="data-deletion.html">Data deletion</a></div>
+</nav></header>
+<main id="content" class="legal-layout">
+<aside class="toc" aria-label="Privacy Policy sections"><p class="toc-label">On this page</p>
+  <a href="#information">Information</a><a href="#not-collected">Not collected</a><a href="#use">How it is used</a><a href="#sharing">Providers</a><a href="#retention">Retention</a><a href="#controls">Your controls</a>
+</aside>
+<article class="legal-document">
+  <div class="document-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 5 6v5c0 4.7 2.9 8.3 7 10 4.1-1.7 7-5.3 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
   <h1>Privacy Policy</h1>
   <p class="updated">Quick Paste Keyboard &middot; Last updated August 7, 2026</p>
-  <p>This policy explains how Quick Paste Keyboard (&ldquo;Quick Paste,&rdquo; &ldquo;the app,&rdquo; &ldquo;we,&rdquo; or &ldquo;us&rdquo;) handles information. Quick Paste is an offline-first Android custom keyboard with optional Google account cloud sync and optional one-time developer-support purchases.</p>
+  <p class="lede">This policy explains how Quick Paste Keyboard (&ldquo;Quick Paste,&rdquo; &ldquo;the app,&rdquo; &ldquo;we,&rdquo; or &ldquo;us&rdquo;) handles information. Quick Paste is an offline-first Android custom keyboard with optional Google account cloud sync and optional one-time developer-support purchases.</p>
 
   <section class="summary">
     <h2 style="margin-top:0">The short version</h2>
@@ -31,7 +35,7 @@
     </ul>
   </section>
 
-  <h2>1. Information handled by the app</h2>
+  <h2 id="information">1. Information handled by the app</h2>
   <h3>Content you create</h3>
   <p>Quick Paste stores snippets, folders, templates, their ordering, and preferences such as theme, view mode, and auto-send settings locally on your device. If you enable Cloud Sync, eligible snippets, folders, templates, and sync metadata are also stored in Google Cloud Firestore under your authenticated account.</p>
 
@@ -45,7 +49,7 @@
   <h3>Google Play purchases</h3>
   <p>Optional support purchases are one-time, repeatable purchases processed by Google Play Billing. Google Play displays the localized price and handles the transaction. Quick Paste receives purchase status, product ID, and purchase tokens needed to verify and consume the purchase; it does not receive your full card number or other payment credentials. A support purchase does not unlock features, and all app features remain free.</p>
 
-  <h2>2. Information the keyboard does not collect</h2>
+  <h2 id="not-collected">2. Information the keyboard does not collect</h2>
   <ul>
     <li>Keystrokes, passwords, or text typed in other apps</li>
     <li>Clipboard history or clipboard contents from other apps</li>
@@ -53,7 +57,7 @@
     <li>Advertising content or data used to track you across apps or websites</li>
   </ul>
 
-  <h2>3. Why information is used</h2>
+  <h2 id="use">3. Why information is used</h2>
   <ul>
     <li><strong>Core app operation:</strong> save and organize your snippets and preferences locally.</li>
     <li><strong>Optional Cloud Sync:</strong> back up, synchronize, restore, and resolve changes across signed-in devices.</li>
@@ -63,7 +67,7 @@
     <li><strong>Haptics:</strong> provide optional tactile feedback.</li>
   </ul>
 
-  <h2>4. Service providers and sharing</h2>
+  <h2 id="sharing">4. Service providers and sharing</h2>
   <p>We do not sell or rent your personal information. Information is processed by the following providers only for the purposes described above:</p>
   <ul>
     <li><strong>Google Firebase Authentication and Google Sign-In</strong> for optional account authentication.</li>
@@ -73,7 +77,7 @@
   </ul>
   <p>These services process information under their own terms and privacy notices. We do not share your user-created content with advertisers, data brokers, social networks, or other Quick Paste users.</p>
 
-  <h2>5. Storage, retention, and security</h2>
+  <h2 id="retention">5. Storage, retention, and security</h2>
   <ul>
     <li><strong>Local information</strong> remains until you delete it in the app, clear app storage, or uninstall the app.</li>
     <li><strong>Cloud information</strong> remains until you delete individual synced content or use the account-deletion flow. Signing out alone does not delete the cloud copy.</li>
@@ -90,7 +94,7 @@
   </ul>
   <p>A private, non-exported on-device ContentProvider shares app settings with the keyboard process. It is not accessible to other apps and does not send those settings off the device by itself.</p>
 
-  <h2>7. Your controls and account deletion</h2>
+  <h2 id="controls">7. Your controls and account deletion</h2>
   <ul>
     <li>Use Quick Paste without signing in.</li>
     <li>View, edit, and delete local snippets, folders, and templates.</li>
@@ -106,5 +110,7 @@
   <p>We may update this policy when features or legal requirements change. The date above identifies the latest revision.</p>
   <p>Questions or privacy requests: <a href="mailto:aliaminchohan456@gmail.com">aliaminchohan456@gmail.com</a></p>
   <div class="links"><a href="index.html">Home</a><a href="data-deletion.html">Data deletion</a><a href="https://policies.google.com/privacy">Google Privacy Policy</a></div>
-</main></body>
+</article></main>
+<footer class="site-footer"><div class="footer-inner"><span>&copy; 2026 Quick Paste Keyboard</span><span>Transparent by design &middot; Offline first</span></div></footer>
+</body>
 </html>
