@@ -5,26 +5,29 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Delete your Quick Paste Keyboard account and associated cloud data.">
   <title>Account &amp; Data Deletion | Quick Paste Keyboard</title>
-  <style>
-    :root{color-scheme:light dark;--bg:#f7f9fc;--card:#fff;--text:#172033;--muted:#5f6b7d;--accent:#3478f6;--line:#dfe5ee;--soft:#eaf2ff}
-    @media(prefers-color-scheme:dark){:root{--bg:#0b0e13;--card:#151922;--text:#f3f5f9;--muted:#aeb5c2;--line:#293140;--soft:#16243a}}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}
-    main{max-width:820px;margin:auto;padding:48px 22px 72px}a{color:var(--accent)}h1{font-size:clamp(2rem,6vw,3rem);line-height:1.15;margin:0 0 8px}h2{margin:36px 0 10px;font-size:1.35rem}.muted{color:var(--muted)}
-    .notice,.card{border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin:22px 0;background:var(--card)}.notice{background:var(--soft);border-color:color-mix(in srgb,var(--accent) 25%,var(--line))}
-    .step{display:grid;grid-template-columns:34px 1fr;gap:12px;margin:13px 0}.num{width:30px;height:30px;border-radius:10px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:700}
-    li{margin:7px 0}.button{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;padding:12px 18px;border-radius:14px;margin-top:8px}.links{display:flex;gap:14px;flex-wrap:wrap;margin-top:36px}
-  </style>
+  <link rel="stylesheet" href="legal.css">
 </head>
-<body><main>
+<body>
+<a class="skip-link" href="#content">Skip to content</a>
+<header class="site-header"><nav class="nav" aria-label="Main navigation">
+  <a class="brand" href="index.html"><span class="brand-mark">Q</span><span>Quick Paste</span></a>
+  <div class="nav-links"><a href="index.html">Home</a><a href="privacy_policy.html">Privacy</a><a href="data-deletion.html" aria-current="page">Data deletion</a></div>
+</nav></header>
+<main id="content" class="legal-layout">
+<aside class="toc" aria-label="Data deletion sections"><p class="toc-label">On this page</p>
+  <a href="#in-app">Delete in app</a><a href="#request">Email request</a><a href="#deleted">What is deleted</a><a href="#retained">What remains</a><a href="#help">Get help</a>
+</aside>
+<article class="legal-document">
+  <div class="document-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V4h6v3m-8 0 1 14h8l1-14"/><path d="M10 11v6m4-6v6"/></svg></div>
   <h1>Delete your account and data</h1>
   <p class="muted">Quick Paste Keyboard &middot; Last updated August 7, 2026</p>
-  <p>This page provides both the in-app deletion path and an external way to request deletion if you no longer have access to the app.</p>
+  <p class="lede">This page provides both the in-app deletion path and an external way to request deletion if you no longer have access to the app.</p>
 
   <section class="notice">
     <strong>No account?</strong> Quick Paste works offline without signing in. If you never used Google Sign-In for Cloud Sync, there is no Quick Paste cloud account to delete. Delete individual items, clear the app&rsquo;s storage, or uninstall the app to remove local data.
   </section>
 
-  <h2>Delete inside the app</h2>
+  <h2 id="in-app">Delete inside the app</h2>
   <div class="card">
     <div class="step"><span class="num">1</span><div>Open <strong>Quick Paste</strong> and go to <strong>Settings</strong>.</div></div>
     <div class="step"><span class="num">2</span><div>Open <strong>Cloud Sync</strong>.</div></div>
@@ -34,7 +37,7 @@
   <p>This permanently deletes the Firebase Authentication account and associated cloud snippets, folders, templates, and synchronization metadata. Your local data on the current device remains so you can continue using Quick Paste offline; delete it separately if desired.</p>
   <div class="notice"><strong>Important:</strong> Signing out only disconnects the device and stops synchronization. It does not delete your cloud account or cloud data.</div>
 
-  <h2>Request deletion without the app</h2>
+  <h2 id="request">Request deletion without the app</h2>
   <p>Email us from the Google email address used for Quick Paste Cloud Sync. This allows us to verify which account should be removed.</p>
   <div class="card">
     <p><strong>Email:</strong> <a href="mailto:aliaminchohan456@gmail.com?subject=Delete%20my%20Quick%20Paste%20account">aliaminchohan456@gmail.com</a></p>
@@ -44,7 +47,7 @@
   </div>
   <p>We may request reasonable verification before deleting data to prevent unauthorized deletion. Verified requests will normally be completed within 30 days. We will confirm when processing is complete.</p>
 
-  <h2>What is deleted</h2>
+  <h2 id="deleted">What is deleted</h2>
   <ul>
     <li>The Quick Paste Firebase Authentication account</li>
     <li>Cloud-synced snippets and folders</li>
@@ -52,7 +55,7 @@
     <li>Cloud synchronization metadata associated with the account</li>
   </ul>
 
-  <h2>What is not deleted automatically</h2>
+  <h2 id="retained">What is not deleted automatically</h2>
   <ul>
     <li><strong>Local app data:</strong> remains on devices until you delete it, clear app storage, or uninstall Quick Paste.</li>
     <li><strong>Google account:</strong> deleting Quick Paste data does not delete your Google account.</li>
@@ -60,8 +63,10 @@
     <li><strong>Anonymous analytics:</strong> aggregated or de-identified support-flow reporting that is no longer associated with the deleted account may remain under Firebase retention settings.</li>
   </ul>
 
-  <h2>Need help?</h2>
+  <h2 id="help">Need help?</h2>
   <p>Contact <a href="mailto:aliaminchohan456@gmail.com">aliaminchohan456@gmail.com</a>. Do not send passwords, payment-card details, snippet contents, or other sensitive information.</p>
   <div class="links"><a href="index.html">Home</a><a href="privacy_policy.html">Privacy Policy</a></div>
-</main></body>
+</article></main>
+<footer class="site-footer"><div class="footer-inner"><span>&copy; 2026 Quick Paste Keyboard</span><span>Clear controls &middot; No dark patterns</span></div></footer>
+</body>
 </html>
