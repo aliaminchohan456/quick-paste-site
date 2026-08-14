@@ -28,7 +28,7 @@
     <ul>
       <li>You can use all core features without an account.</li>
       <li>Your snippets, folders, templates, and settings stay on your device by default.</li>
-      <li>Cloud Sync is optional and sends only app content you create to Firebase after you sign in.</li>
+      <li>Cloud Sync is optional and uploads queued app content only after you sign in and choose Sync Now.</li>
       <li>The keyboard does not record or upload what you type in other apps.</li>
       <li>We do not show ads, sell personal data, or use data for cross-app advertising.</li>
       <li>Firebase Analytics records limited support-page and purchase-funnel events. It never includes snippet content, clipboard text, or text typed in other apps.</li>
@@ -38,13 +38,13 @@
 
   <h2 id="information">1. Information handled by the app</h2>
   <h3>Content you create</h3>
-  <p>Quick Paste stores snippets, folders, templates, their ordering, and preferences such as theme, view mode, and auto-send settings locally on your device. If you enable Cloud Sync, eligible snippets, folders, templates, and sync metadata are also stored in Google Cloud Firestore under your authenticated account.</p>
+  <p>Quick Paste stores snippets, folders, templates, their ordering, and preferences such as theme, view mode, and auto-send settings locally on your device. If you sign in and choose Sync Now, eligible queued snippets, folders, templates, and sync metadata are uploaded to Google Cloud Firestore under your authenticated account.</p>
 
   <h3>Google account information</h3>
   <p>When you voluntarily sign in, Firebase Authentication and Google Sign-In provide an account identifier and basic profile information such as your email address, display name, and Google profile-photo URL. This information is used to authenticate you and associate cloud data and verified support history with your account. Quick Paste does not request access to your contacts, Gmail, Google Drive, photo library, or messages.</p>
 
   <h3>Limited analytics</h3>
-  <p>Firebase Analytics is used only to understand the optional support flow. Events may include viewing the support page, selecting a support tier, expanding additional tiers, starting checkout, and whether a purchase completed, was cancelled, or failed. An event may include the non-personal product tier ID. Firebase may automatically process app-instance, device, operating-system, country/region, and general app-interaction information according to Google&rsquo;s service documentation and your device settings.</p>
+  <p>Firebase Analytics is used only to understand the optional support flow. Events may include viewing the support page, selecting a support tier, expanding additional tiers, starting checkout, and whether a purchase completed, was cancelled, or failed. An event may include the non-personal product tier ID. Firebase may automatically process app-instance, device, operating-system, country/region, Android advertising ID, and general app-interaction information according to Google&rsquo;s service documentation and your device settings. Quick Paste uses this information for analytics only, not to display or target advertising.</p>
   <p>We do not place snippet text, folder names, template content, clipboard contents, typed text, email addresses, or payment-card information in analytics events.</p>
 
   <h3>Google Play purchases</h3>
@@ -52,7 +52,7 @@
 
   <h3>Optional Top Supporters leaderboard</h3>
   <p>If you have completed a verified support purchase, you may separately choose to join the public Top Supporters leaderboard. Nothing is published merely because you purchased support or signed in. The app first presents an unchecked consent control and publishes your entry only after you select it and approve.</p>
-  <p>With your consent, the leaderboard may publicly display your Google display name, Google profile photo, verified support count, masked contribution level (shown as one to four stars), rank, and a &ldquo;You&rdquo; indicator visible only to your signed-in session. Your exact support amount, email address, Firebase user ID, purchase token, and private purchase history are not displayed publicly.</p>
+  <p>With your consent, the leaderboard may publicly display your Google display name, Google profile photo, verified support count, masked contribution level (shown as $ to $$$$), rank, and a &ldquo;You&rdquo; indicator visible only to your signed-in session. Your exact support amount, email address, Firebase user ID, purchase token, and private purchase history are not displayed publicly.</p>
   <p>You can leave the leaderboard from the support screen. Leaving deletes the public leaderboard entry and removes its public name, photo, count, and masked level. It does not delete the private support history linked to your account. You may choose to join again later.</p>
 
   <h2 id="not-collected">2. Information the keyboard does not collect</h2>
@@ -101,6 +101,7 @@
     <li><strong>INTERNET:</strong> used for Google Sign-In, optional Cloud Sync, Firebase support analytics, Google Play Billing, and related service communication.</li>
     <li><strong>VIBRATE:</strong> used for tactile feedback.</li>
     <li><strong>BILLING:</strong> used for optional Google Play support purchases.</li>
+    <li><strong>AD_ID:</strong> may be used by Firebase Analytics for limited support-flow analytics and attribution; Quick Paste does not display or target ads.</li>
   </ul>
   <p>A private, non-exported on-device ContentProvider shares app settings with the keyboard process. It is not accessible to other apps and does not send those settings off the device by itself.</p>
 
@@ -108,7 +109,7 @@
   <ul>
     <li>Use Quick Paste without signing in.</li>
     <li>View, edit, and delete local snippets, folders, and templates.</li>
-    <li>Sign out to stop future cloud synchronization on that device.</li>
+    <li>Leave changes queued locally until you explicitly choose Sync Now, or sign out to disconnect cloud synchronization on that device.</li>
     <li>Choose whether to join the Top Supporters leaderboard through a separate, unchecked consent control.</li>
     <li>Leave the leaderboard at any time without deleting your private purchase history.</li>
     <li>In the app, open <strong>Settings &gt; Cloud Sync &gt; Delete account and cloud data</strong> to delete the Firebase account and associated cloud snippets, folders, templates, and sync metadata. Local data on the device remains unless you delete it separately.</li>
